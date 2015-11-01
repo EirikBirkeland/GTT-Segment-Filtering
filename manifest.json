@@ -1,0 +1,14 @@
+{
+   "content_scripts": [ {
+      "js": [ "main.js" ],
+      "matches": [ "http://translate.google.com/*", "https://translate.google.com/*" ]
+   } ],
+   "description": "Minimalistic toolbar for filtering segment types in GTT. Just open a GTT document.",
+   "icons": {
+      "128": "icon.png"
+   },
+   "manifest_version": 2,
+   "name": "GTT Segment Filtering",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.5.5"
+}
