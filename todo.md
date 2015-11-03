@@ -6,3 +6,4 @@
 - [ ] Use MutationObserver to show/hide buttons when a new class comes into existence, or when the last member of a class disappears.
 - [ ] It sometimes doesn't choose the best color for a class when a node has several class attributes...
 - [ ] goog-gtc-ph-missing should be entirely separate from other tag types in how it's filtered
+- [ ] Spans of hidden segments should be replaced by something like [10 segments hidden here] and perhaps each such group could have a button to revert them to their original state.
