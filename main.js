@@ -90,10 +90,9 @@
                         arr[i].classList.add("hidden-" + className + "-element");
                         changeDisplayValue(arr[i], displayValue, className);
                         var tmpId = arr[i].parentNode.id;
-                        var tmpIdColor = sourceDoc.getElementById(tmpId).firstChild.style.color;
-                        if(!tmpIdColor){
-                        	tmpIdColor = "grey"
-                        } else { tmpIdColor = "" }
+                        if(!sourceDoc.getElementById(tmpId).firstChild.style.color){
+                        	sourceDoc.getElementById(tmpId).firstChild.style.color = "grey"
+                        } else { sourceDoc.getElementById(tmpId).firstChild.style.color = "" }
                         toggleTrailingBRs(arr[i], displayValue, className);
                     }
 
