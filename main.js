@@ -27,8 +27,9 @@
         }, 2000);
 
         function main() { // Build button row
-            let targetDoc = document.getElementById("transarea").getElementsByTagName("iframe")[1].contentDocument;
-            let sourceDoc = document.getElementById("transarea").getElementsByTagName("iframe")[0].contentDocument;
+            let query = document.querySelector.bind(document);
+            let targetDoc = query("#transarea").getElementsByTagName("iframe")[1].contentDocument;
+            let sourceDoc = query("#transarea").getElementsByTagName("iframe")[0].contentDocument;
             let color = {};
 
             for (let key of Object.keys(classObj)) {
@@ -47,7 +48,7 @@
                 let button = document.createElement("div");
                 button.role = "button";
                 button.className = "goog-inline-block jfk-button jfk-button-standard jfk-button-narrow jfk-button-collapse-left jfk-button-collapse-right jfk-button-clear-outline";
-                let existingToolbar = document.getElementById("wbmenu").firstChild;
+                let existingToolbar = query("#wbmenu").firstChild;
 
                 return function(classObj, color) {
                     for (let key of Object.keys(classObj)) {
@@ -60,7 +61,7 @@
                             buttons[key].style.borderWidth = "medium";
                              buttons[key].style.marginBottom = "5px";
                             existingToolbar.insertBefore(buttons[key], existingToolbar.lastChild);
-                            document.getElementById(key).addEventListener('click', toggle(key, classObj[key]))
+                            query(`#${key}`).addEventListener('click', toggle(key, classObj[key]))
                         }
                     }
                 }
@@ -70,33 +71,33 @@
 
             function toggle(key, className) {
                 let toggle = {};
-                let button = document.getElementById(key);
+                let button = query(`#${key}`);
                 toggle[className] = false;
                 return function() {
                     if (!toggle[className]) {
-                        toggleClass(className, "none");
+                        _toggleClass(className, "none");
                         toggle[className] = true;
                         button.style.borderColor = "red";
                     } else {
-                        toggleClass(className, "");
+                        _toggleClass(className, "");
                         toggle[className] = false;
                         button.style.borderColor = "";
                     }
                 };
 
-                function toggleClass(className, displayValue) {
+                function _toggleClass(className, displayValue) {
                     let arr = targetDoc.getElementsByClassName(className);
                     for (let i = 0, len = arr.length; i < len; i++) {
                         arr[i].classList.add("hidden-" + className + "-element");
-                        changeDisplayValue(arr[i], displayValue, className);
+                        _changeDisplayValue(arr[i], displayValue, className);
                         var tmpId = arr[i].parentNode.id;
                         if(!sourceDoc.getElementById(tmpId).firstChild.style.color){
                         	sourceDoc.getElementById(tmpId).firstChild.style.color = "grey"
                         } else { sourceDoc.getElementById(tmpId).firstChild.style.color = "" }
-                        toggleTrailingBRs(arr[i], displayValue, className);
+                        _toggleTrailingBRs(arr[i], displayValue, className);
                     }
 
-                    function changeDisplayValue(node, displayValue, className) {
+                    function _changeDisplayValue(node, displayValue, className) {
                         let pp = node.parentNode.parentNode;
                         let flag = false;
                         // The following logic checks to see if any existing parent-parent 'LI' node can be hidden safely
@@ -127,7 +128,7 @@
                         }
                     }
 
-                    function toggleTrailingBRs(node, displayValue) {
+                    function _toggleTrailingBRs(node, displayValue) {
                         let p = node.parentNode;
                         // Was getting a TypeError for some documents due to non-existing nodes/attribute,
                         // but by checking truthiness first the problem is avoided.
