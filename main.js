@@ -28,6 +28,7 @@
 
         function main() { // Build button row
             let query = document.querySelector.bind(document);
+            let queryAll = document.querySelector.bind(document); // TODO add queryAll
             let targetDoc = query("#transarea").getElementsByTagName("iframe")[1].contentDocument;
             let sourceDoc = query("#transarea").getElementsByTagName("iframe")[0].contentDocument;
             let color = {};
@@ -87,13 +88,15 @@
 
                 function _toggleClass(className, displayValue) {
                     let arr = targetDoc.getElementsByClassName(className);
-                    for (let i = 0, len = arr.length; i < len; i++) {
+					for (let i = 0, len = arr.length; i < len; i++) {
                         arr[i].classList.add("hidden-" + className + "-element");
                         _changeDisplayValue(arr[i], displayValue, className);
                         var tmpId = arr[i].parentNode.id;
                         if(!sourceDoc.getElementById(tmpId).firstChild.style.color){
-                        	sourceDoc.getElementById(tmpId).firstChild.style.color = "grey"
-                        } else { sourceDoc.getElementById(tmpId).firstChild.style.color = "" }
+                        	sourceDoc.getElementById(tmpId).firstChild.style.color = "grey";
+							sourceDoc.getElementById(tmpId).classList.add('cth_exclude');
+                        } else { sourceDoc.getElementById(tmpId).firstChild.style.color = "";
+								 sourceDoc.getElementById(tmpId).classList.remove('cth_exclude');						}
                         _toggleTrailingBRs(arr[i], displayValue, className);
                     }
 
