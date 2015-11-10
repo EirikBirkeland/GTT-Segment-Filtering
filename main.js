@@ -89,14 +89,16 @@
                 function _toggleClass(className, displayValue) {
                     let arr = targetDoc.getElementsByClassName(className);
 					for (let i = 0, len = arr.length; i < len; i++) {
-                        arr[i].classList.add("hidden-" + className + "-element");
+                        // arr[i].classList.add("hidden-" + className + "-element");
                         _changeDisplayValue(arr[i], displayValue, className);
                         var tmpId = arr[i].parentNode.id;
-                        if(!sourceDoc.getElementById(tmpId).firstChild.style.color){
-                        	sourceDoc.getElementById(tmpId).firstChild.style.color = "grey";
-							sourceDoc.getElementById(tmpId).classList.add('cth_exclude');
-                        } else { sourceDoc.getElementById(tmpId).firstChild.style.color = "";
-								 sourceDoc.getElementById(tmpId).classList.remove('cth_exclude');						}
+                        // get corresponding source segment and change its color to 'grey' + tag it for exclusion (mainly for QA)
+                        var a = sourceDoc.getElementById(tmpId);
+                        if(!a.firstChild.style.color){
+                        	a.firstChild.style.color = "grey";
+							a.classList.add('cth_exclude');
+                        } else { a.firstChild.style.color = "";
+								 a.classList.remove('cth_exclude');						}
                         _toggleTrailingBRs(arr[i], displayValue, className);
                     }
 
