@@ -7,7 +7,7 @@
     window.onload = function() {
         
         "use strict";
-
+        let DEFAULT_TIMEOUT = 2000;
         let classObj = {
             // The below keys will be the Id's for any created buttons
             "ice100Button": "goog-gtc-from-tm-score-100-ice",
@@ -24,7 +24,7 @@
 
         setTimeout(function() {
             main();
-        }, 2000);
+        }, DEFAULT_TIMEOUT);
 
         function main() { // Build button row
             let query = document.querySelector.bind(document);
@@ -88,17 +88,17 @@
 
                 function _toggleClass(className, displayValue) {
                     let arr = targetDoc.getElementsByClassName(className);
-					for (let i = 0, len = arr.length; i < len; i++) {
+                    for (let i = 0, len = arr.length; i < len; i++) {
                         // arr[i].classList.add("hidden-" + className + "-element");
                         _changeDisplayValue(arr[i], displayValue, className);
                         var tmpId = arr[i].parentNode.id;
                         // get corresponding source segment and change its color to 'grey' + tag it for exclusion (mainly for QA)
                         var a = sourceDoc.getElementById(tmpId);
                         if(!a.firstChild.style.color){
-                        	a.firstChild.style.color = "grey";
-							a.classList.add('cth_exclude');
+                            a.firstChild.style.color = "grey";
+                            a.classList.add('cth_exclude');
                         } else { a.firstChild.style.color = "";
-								 a.classList.remove('cth_exclude');						}
+                                 a.classList.remove('cth_exclude');                        }
                         _toggleTrailingBRs(arr[i], displayValue, className);
                     }
 
@@ -107,7 +107,7 @@
                         let flag = false;
                         // The following logic checks to see if any existing parent-parent 'LI' node can be hidden safely
                         // without accidentally hiding any different-colored tags that are children of the same 'LI'.
-						if (!(pp.tagName === 'LI')) {
+                        if (!(pp.tagName === 'LI')) {
                             node.parentNode.style.display = displayValue;
                         } else {
                             if (pp.childNodes.length > 1) {
