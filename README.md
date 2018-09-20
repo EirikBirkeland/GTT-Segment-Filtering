@@ -1,3 +1,5 @@
+Legacy code. See the `gttbooster` repository for a more up-to-date version.
+
 # GTT-Segment-Filtering
 Filter segment types in GTT
 
